@@ -3,9 +3,9 @@ import bodyParser from 'body-parser';
 // Importar la configuración de Sequelize antes de cualquier controlador o servicio que utilice los modelos
 import './Database/Sequelize';
 
-import { ProductController } from "./task/Infraestructure/controllers/ProductsController";
-import { PostgresProductsRepository } from "./task/Infraestructure/repositories/PostgresOrdenesRepository";
-import { ProductService } from "./task/application/services/user-cases/ProductService";
+import { ProductController } from "./Products/Infraestructure/controllers/ProductsController";
+import { PostgresProductsRepository } from "./Products/Infraestructure/repositories/PostgresProductsRepository";
+import { ProductService } from "./Products/application/services/user-cases/ProductService";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

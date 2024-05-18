@@ -1,5 +1,5 @@
 import { Product } from "../../domain/entities/Product";
-import { ProductsRepository } from "../repositories/ProductsRepository";
+import { ProductsRepository } from "./ProductsRepository";
 import ProductModel from "../../domain/entities/ProductModel";
 
 export class PostgresProductsRepository implements ProductsRepository {
