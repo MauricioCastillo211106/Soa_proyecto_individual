@@ -1,11 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// Importar la configuración de Sequelize antes de cualquier controlador o servicio que utilice los modelos
-import './Database/Sequelize';
+import './Database/Sequelize'; // Configuración de Sequelize
 
-import { OrdenesController } from "./Order/infraestructure/controllers/OrderController";
-import { PostgresOrdenesRepository } from "./Order/infraestructure/repositories/PostgresOrderRepository";
-import { OrdenesService } from "./Order/application/services/user-cases/OrderService";
+import { OrdenesController } from './Order/infraestructure/controllers/OrderController';
+import { PostgresOrdenesRepository } from './Order/infraestructure/repositories/PostgresOrderRepository';
+import { OrdenesService } from './Order/application/services/user-cases/OrderService';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,9 +16,11 @@ const ordenesService = new OrdenesService(ordenesRepository);
 const ordenesController = new OrdenesController(ordenesService);
 
 // Definición de rutas para Ordenes
-app.post('/api/v1/ordenes', (req, res) => ordenesController.createOrden(req, res));
-app.get('/api/v1/ordenes', (req, res) => ordenesController.getAllOrdenes(req, res));
-app.patch('/api/v1/ordenes/:id/status', (req, res) => ordenesController.updateOrderStatus(req,res));
+app.route('/api/v1/ordenes')
+    .post(ordenesController.createOrden.bind(ordenesController))
+    .get(ordenesController.getAllOrdenes.bind(ordenesController));
+
+app.patch('/api/v1/ordenes/:id/status', ordenesController.updateOrderStatus.bind(ordenesController));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
