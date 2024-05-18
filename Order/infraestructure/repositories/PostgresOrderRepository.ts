@@ -1,5 +1,5 @@
 import { Orden } from "../../domain/entities/Order";
-import { OrdenesRepository } from "../repositories/OrdenesRepositoy";
+import { OrdenesRepository } from "./OrderRepositoy";
 import OrdenModel from "../../domain/entities/OrderModel";
 
 export class PostgresOrdenesRepository implements OrdenesRepository {

@@ -1,5 +1,5 @@
 import { Orden } from '../../../domain/entities/Order';
-import { OrdenesRepository } from '../../../infraestructure/repositories/OrdenesRepositoy';
+import { OrdenesRepository } from '../../../infraestructure/repositories/OrderRepositoy';
 
 export class OrdenesService {
     constructor(

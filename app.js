@@ -7,9 +7,9 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 // Importar la configuración de Sequelize antes de cualquier controlador o servicio que utilice los modelos
 require("./Database/Sequelize");
-const OrdenesController_1 = require("./task/infraestructure/controllers/OrdenesController");
-const PostgresOrdenesRepository_1 = require("./task/infraestructure/repositories/PostgresOrdenesRepository");
-const OrderService_1 = require("./task/application/services/user-cases/OrderService");
+const OrdenesController_1 = require("./Order/infraestructure/controllers/OrderController");
+const PostgresOrdenesRepository_1 = require("./Order/infraestructure/repositories/PostgresOrderRepository");
+const OrderService_1 = require("./Order/application/services/user-cases/OrderService");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3000;
 app.use(body_parser_1.default.json());
