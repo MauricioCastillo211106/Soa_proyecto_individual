@@ -1,11 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// Importar la configuración de Sequelize antes de cualquier controlador o servicio que utilice los modelos
-import './Database/Sequelize';
+import './Database/Sequelize'; // Configuración de Sequelize
 
-import { ProductController } from "./Products/Infraestructure/controllers/ProductsController";
-import { PostgresProductsRepository } from "./Products/Infraestructure/repositories/PostgresProductsRepository";
-import { ProductService } from "./Products/application/services/user-cases/ProductService";
+import { ProductController } from './Products/Infraestructure/controllers/ProductsController';
+import { PostgresProductsRepository } from './Products/Infraestructure/repositories/PostgresProductsRepository';
+import { ProductService } from './Products/application/services/user-cases/ProductService';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,9 +16,11 @@ const productService = new ProductService(productsRepository);
 const productController = new ProductController(productService);
 
 // Definición de rutas para Products
-app.post('/api/v1/productos', (req, res) => productController.createProduct(req, res));
-app.get('/api/v1/productos', (req, res) => productController.getAllProducts(req, res));
-app.delete('/api/v1/productos/:id',(req, res) => productController.deleteProductById(req,res));
+app.route('/api/v1/productos')
+    .post(productController.createProduct.bind(productController))
+    .get(productController.getAllProducts.bind(productController));
+
+app.delete('/api/v1/productos/:id', productController.deleteProductById.bind(productController));
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
